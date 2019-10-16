@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, Text, StatusBar, Image} from 'react-native'
-const Home = () => {
+const Podcasts = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -15,10 +15,10 @@ const Home = () => {
           style={{width: 300, height: 300}}
           resizeMode="contain"
         />
-        <Text>Saudoso pudim</Text>
+        <Text>Podcasts</Text>
       </View>
     </>
   )
 }
 
-export default Home
+export default Podcasts

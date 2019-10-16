@@ -1,11 +1,21 @@
-import {createAppContainer, createSwitchNavigator} from 'react-navigation'
+import {createAppContainer} from 'react-navigation'
+import {createStackNavigator} from 'react-navigation-stack'
 
-import Home from '@screens/home'
+import Main from '@screens/main'
+import Podcasts from '@screens/podcasts'
 
 const Routes = createAppContainer(
-  createSwitchNavigator({
-    Home,
-  }),
+  createStackNavigator(
+    {
+      Main,
+      Podcasts,
+    },
+    {
+      defaultNavigationOptions: {
+        header: null,
+      },
+    },
+  ),
 )
 
 export default Routes
