@@ -12,11 +12,13 @@ import store from '@store'
 import {setNavigator} from '@services'
 
 import Routes from './routes'
+import Player from '@components/player'
 
 const App = () => {
   return (
     <Provider store={store}>
       <Routes ref={setNavigator} />
+      <Player />
     </Provider>
   )
 }
