@@ -16,6 +16,8 @@
     "react-native": "0.61.2",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-iphone-x-helper": "^1.2.1",
+    "react-native-swift": "^1.2.2",
+    "react-native-track-player": "^1.1.8",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.9.4",

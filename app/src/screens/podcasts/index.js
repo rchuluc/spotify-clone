@@ -1,5 +1,8 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import PlayerActions from '@store/ducks/player'
 import {
   Container,
   EpisodeList,
@@ -15,11 +18,15 @@ import {
   Author,
 } from './styles'
 
-const Podcasts = ({navigation}) => {
+const Podcasts = ({navigation, setPodcastRequest, currentEpisode}) => {
   const podcast = navigation.getParam('podcast')
 
   const handleBack = () => {
     navigation.goBack()
+  }
+
+  const handlePlay = episodeId => {
+    setPodcastRequest(podcast, episodeId)
   }
 
   return (
@@ -34,15 +41,19 @@ const Podcasts = ({navigation}) => {
             <Cover source={{uri: podcast.cover}} />
             <PodcastTitle>{podcast.title}</PodcastTitle>
             <PlayButton>
-              <PlayButtonText>REPRODUZIR</PlayButtonText>
+              <PlayButtonText onPress={() => handlePlay()}>
+                REPRODUZIR
+              </PlayButtonText>
             </PlayButton>
           </PodcastDetails>
         )}
         data={podcast.tracks}
         keyExtractor={episode => String(episode.id)}
         renderItem={({item: episode}) => (
-          <Episode>
-            <Title>{episode.title}</Title>
+          <Episode onPress={() => handlePlay(episode.id)}>
+            <Title active={currentEpisode && currentEpisode.id === episode.id}>
+              {episode.title}
+            </Title>
             <Author>{episode.title}</Author>
           </Episode>
         )}
@@ -51,4 +62,18 @@ const Podcasts = ({navigation}) => {
   )
 }
 
-export default Podcasts
+const mapStateToProps = state => ({
+  currentEpisode: state.player.podcast
+    ? state.player.podcast.tracks.find(
+        episode => episode.id === state.player.current,
+      )
+    : null,
+})
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(PlayerActions, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Podcasts)
